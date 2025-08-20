@@ -35,6 +35,11 @@ T &MyVector<T>::at(const size_t index) {
 }
 
 template <typename T>
+const T &MyVector<T>::at(const size_t index) const {
+    return m_data[index];
+}
+
+template <typename T>
 MyVector<T> &MyVector<T>::operator=(const MyVector &other) {
     if (this != &other) {
         delete[] m_data;
@@ -56,7 +61,7 @@ const T &MyVector<T>::operator[](const size_t index) const {
 template <typename T>
 std::ostream &operator<<(std::ostream &os, const MyVector<T> &myVector) {
     for (size_t i = 0; i < myVector.size(); ++i) {
-        os << myVector[i] << " ";
+        os << myVector.at(i) << " ";
     }
     return os;
 }

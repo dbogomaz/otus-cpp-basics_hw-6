@@ -14,14 +14,11 @@ public:
     size_t size() const;
     void reserve(const size_t new_capacity);
     T& at(const size_t index);
+    const T& at(size_t index) const; 
     
     MyVector& operator=(const MyVector& other);
     T& operator[](const size_t index);
     const T& operator[](const size_t index) const;
-
-    template <typename U>
-    friend std::ostream& operator<<(std::ostream& os, const MyVector<U>& myVector);
-
 
 private:
     size_t m_capacity{0};         // вместимость
