@@ -5,7 +5,7 @@
 #include "myvector.h"
 
 template <typename T>
-MyVector<T>::MyVector(size_t size) : m_size{size} {
+MyVector<T>::MyVector(const size_t size) : m_size{size} {
     m_capacity = static_cast<size_t>(m_size * m_capacityFactor);
     if (m_size > 0) {
         m_data = new T[m_capacity];
@@ -13,7 +13,7 @@ MyVector<T>::MyVector(size_t size) : m_size{size} {
 }
 
 template <typename T>
-MyVector<T>::MyVector(std::initializer_list<T> initList) : m_size{initList.size()} {
+MyVector<T>::MyVector(const std::initializer_list<T> initList) : m_size{initList.size()} {
     m_capacity = static_cast<size_t>(m_size * m_capacityFactor);
     if (m_size > 0) {
         m_data = new T[m_capacity];
@@ -77,7 +77,7 @@ size_t MyVector<T>::size() const {
 }
 
 template <typename T>
-void MyVector<T>::reserve(size_t new_capacity) {
+void MyVector<T>::reserve(const size_t new_capacity) {
     if (new_capacity > m_capacity) {
         T *new_data = new T[new_capacity];
         for (size_t i = 0; i < m_size; ++i) {

@@ -5,14 +5,14 @@
 template <typename T>
 class MyVector {
 public:
-    explicit MyVector(size_t size = 0);
-    MyVector(std::initializer_list<T> initList);
+    explicit MyVector(const size_t size = 0);
+    MyVector(const std::initializer_list<T> initList);
     MyVector(const MyVector& other);
     ~MyVector();
 
     size_t capacity() const;
     size_t size() const;
-    void reserve(size_t new_capacity);
+    void reserve(const size_t new_capacity);
     T& at(const size_t index);
     
     MyVector& operator=(const MyVector& other);
