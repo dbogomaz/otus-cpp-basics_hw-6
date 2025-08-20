@@ -13,7 +13,7 @@ MyVector<T>::MyVector(size_t size) : m_size{size} {
 }
 
 template <typename T>
-inline MyVector<T>::MyVector(std::initializer_list<T> initList) : m_size{initList.size()} {
+MyVector<T>::MyVector(std::initializer_list<T> initList) : m_size{initList.size()} {
     m_capacity = static_cast<size_t>(m_size * m_capacityFactor);
     if (m_size > 0) {
         m_data = new T[m_capacity];
@@ -27,6 +27,11 @@ inline MyVector<T>::MyVector(std::initializer_list<T> initList) : m_size{initLis
 template <typename T>
 MyVector<T>::MyVector(const MyVector &other) {
     copyFrom(other);
+}
+
+template <typename T>
+T &MyVector<T>::at(const size_t index) {
+    return m_data[index];
 }
 
 template <typename T>

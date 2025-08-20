@@ -14,10 +14,10 @@ int main() {
     std::cout << "Size: " << vec.size() << std::endl;
     std::cout << "MyVector: " << vec << std::endl;
 
-    vec[1] = 111;
+    vec.at(2) = 111;
 
     for (size_t i = 0; i < vec.size(); i++) {
-        std::cout << vec[i] << " ";
+        std::cout << vec.at(i) << " ";
     }
 
     std::cout << std::endl;

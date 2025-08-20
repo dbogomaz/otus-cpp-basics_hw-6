@@ -13,6 +13,7 @@ public:
     size_t capacity() const;
     size_t size() const;
     void reserve(size_t new_capacity);
+    T& at(const size_t index);
     
     MyVector& operator=(const MyVector& other);
     T& operator[](const size_t index);
