@@ -27,6 +27,7 @@ private:
     T* m_data{nullptr};
 
     void copyFrom(const MyVector& other);
+    void checkIndex(const size_t index, const char* function_name) const;
 };
 
 template <typename T>

@@ -1,5 +1,6 @@
 // file: myvector.ipp
 
+#include <sstream>
 #include <stdexcept>
 
 #include "myvector.h"
@@ -31,11 +32,13 @@ MyVector<T>::MyVector(const MyVector &other) {
 
 template <typename T>
 T &MyVector<T>::at(const size_t index) {
+    checkIndex(index, "at");
     return m_data[index];
 }
 
 template <typename T>
 const T &MyVector<T>::at(const size_t index) const {
+    checkIndex(index, "at");
     return m_data[index];
 }
 
@@ -50,11 +53,13 @@ MyVector<T> &MyVector<T>::operator=(const MyVector &other) {
 
 template <typename T>
 T &MyVector<T>::operator[](const size_t index) {
+    checkIndex(index, "operator[]");
     return m_data[index];
 }
 
 template <typename T>
 const T &MyVector<T>::operator[](const size_t index) const {
+    checkIndex(index, "operator[]");
     return m_data[index];
 }
 
@@ -101,5 +106,15 @@ void MyVector<T>::copyFrom(const MyVector &other) {
     m_data = new T[m_capacity];
     for (size_t i = 0; i < m_size; ++i) {
         m_data[i] = other.m_data[i];
+    }
+}
+
+template <typename T>
+void MyVector<T>::checkIndex(const size_t index, const char *function_name) const {
+    if (index >= m_size) {
+        std::ostringstream oss;
+        oss << "MyVector::" << function_name << "(): index " << index
+            << " out of range (size: " << m_size << ")";
+        throw std::out_of_range(oss.str());
     }
 }
