@@ -10,20 +10,29 @@ public:
     MyVector(const MyVector& other);
     ~MyVector();
 
-    MyVector& operator=(const MyVector& other);
-
     size_t capacity() const;
     size_t size() const;
     void reserve(size_t new_capacity);
+    
+    MyVector& operator=(const MyVector& other);
+    T& operator[](const size_t index);
+    const T& operator[](const size_t index) const;
+
+    template <typename U>
+    friend std::ostream& operator<<(std::ostream& os, const MyVector<U>& myVector);
+
 
 private:
     size_t m_capacity{0};         // вместимость
     size_t m_size{0};             // текущий размер
     float m_capacityFactor{1.5};  // коэффициент выделения памяти
     T* m_data{nullptr};
-    
+
     void copyFrom(const MyVector& other);
 };
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const MyVector<T>& myVector);
 
 #include "myvector.ipp"
 
