@@ -7,17 +7,20 @@
 
 template <typename T>
 MyVector<T>::MyVector(const size_t size) : m_size{size} {
-    m_capacity = static_cast<size_t>(m_size * m_capacityFactor);
     if (m_size > 0) {
-        m_data = new T[m_capacity];
+        m_capacity = static_cast<size_t>(m_size * m_capacityFactor);
     }
+    m_data = new T[m_capacity];
 }
 
 template <typename T>
 MyVector<T>::MyVector(const std::initializer_list<T> initList) : m_size{initList.size()} {
-    m_capacity = static_cast<size_t>(m_size * m_capacityFactor);
     if (m_size > 0) {
-        m_data = new T[m_capacity];
+        m_capacity = static_cast<size_t>(m_size * m_capacityFactor);
+    }
+    m_data = new T[m_capacity];
+
+    if (m_size > 0) {
         size_t i = 0;
         for (const auto &item : initList) {
             m_data[i++] = item;

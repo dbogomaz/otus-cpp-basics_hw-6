@@ -21,7 +21,7 @@ public:
     const T& operator[](const size_t index) const;
 
 private:
-    size_t m_capacity{0};         // вместимость
+    size_t m_capacity{1};         // вместимость
     size_t m_size{0};             // текущий размер
     float m_capacityFactor{1.5};  // коэффициент выделения памяти
     T* m_data{nullptr};
