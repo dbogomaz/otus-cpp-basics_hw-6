@@ -34,6 +34,23 @@ MyVector<T>::MyVector(const MyVector &other) {
 }
 
 template <typename T>
+MyVector<T>::MyVector(MyVector &&other) noexcept {
+    moveFrom(std::move(other));
+}
+
+template <typename T>
+void MyVector<T>::moveFrom(MyVector&& other) noexcept {
+    m_capacity = other.m_capacity;
+    m_size = other.m_size;
+    m_capacityFactor = other.m_capacityFactor;
+    m_data = other.m_data;
+
+    other.m_capacity = 0;
+    other.m_size = 0;
+    other.m_data = nullptr;
+}
+
+template <typename T>
 T &MyVector<T>::at(const size_t index) {
     checkIndex(index, "at");
     return m_data[index];
@@ -50,6 +67,15 @@ MyVector<T> &MyVector<T>::operator=(const MyVector &other) {
     if (this != &other) {
         delete[] m_data;
         copyFrom(other);
+    }
+    return *this;
+}
+
+template <typename T>
+MyVector<T> &MyVector<T>::operator=(MyVector &&other) noexcept {
+    if (this != &other) {
+        delete[] m_data;
+        moveFrom(std::move(other));
     }
     return *this;
 }
