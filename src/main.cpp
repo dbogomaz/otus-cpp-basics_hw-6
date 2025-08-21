@@ -12,11 +12,7 @@ int main() {
     vec.push_back(7);
     vec.push_back(8);
     vec.push_back(9);
-    // MyVector<int> vec(10);
+    vec.push_back(10);
 
-    std::cout << "Capacity: " << vec.capacity() << std::endl;
-    std::cout << "Size: " << vec.size() << std::endl;
-    std::cout << "MyVector: " << vec << std::endl;
-
-    return 0;
+    vec.print();
 }

@@ -86,6 +86,24 @@ T &MyVector<T>::operator[](const size_t index) {
 }
 
 template <typename T>
+void MyVector<T>::print() const {
+    std::cout << "MyVector" << std::endl;
+
+    std::cout << "\tm_size: " << m_size << std::endl;
+    std::cout << "\tm_data: ";
+    for (size_t i = 0; i < m_size; ++i) {
+        std::cout << m_data[i] << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "\tm_capacity: " << m_capacity << std::endl;
+    std::cout << "\tm_data: ";
+    for (size_t i = 0; i < m_capacity; ++i) {
+        std::cout << m_data[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+template <typename T>
 const T &MyVector<T>::operator[](const size_t index) const {
     checkIndex(index, "operator[]");
     return m_data[index];
@@ -107,9 +125,24 @@ MyVector<T>::~MyVector() {
 template <typename T>
 void MyVector<T>::push_back(const T &value) {
     if (m_size == m_capacity) {
-        reserve(m_capacity * CAPACITY_FACTOR);
+        growCapacity();
     }
     m_data[m_size] = value;
+    ++m_size;
+}
+
+template <typename T>
+void MyVector<T>::insert(const size_t index, const T &value) {
+    if (index == m_size) {
+        push_back(value);
+        return;
+    }
+    checkIndex(index, "insert");
+    if (m_size == m_capacity) {
+        growCapacity();
+    }
+    std::copy_backward(m_data + index, m_data + m_size, m_data + m_size + 1);
+    m_data[index] = value;
     ++m_size;
 }
 
@@ -152,4 +185,14 @@ void MyVector<T>::checkIndex(const size_t index, const char *function_name) cons
             << " out of range (size: " << m_size << ")";
         throw std::out_of_range(oss.str());
     }
+}
+
+template <typename T>
+void MyVector<T>::growCapacity() {
+    size_t new_capacity = static_cast<size_t>(m_capacity * CAPACITY_FACTOR);
+    // Гарантируем хотя бы минимальное увеличение
+    if (new_capacity <= m_capacity) {
+        new_capacity = m_capacity + 1;
+    }
+    reserve(new_capacity);
 }
