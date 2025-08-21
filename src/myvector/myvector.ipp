@@ -1,4 +1,4 @@
-// file: myvector.ipp
+// @file: myvector.ipp
 
 #include <sstream>
 #include <stdexcept>
@@ -205,23 +205,101 @@ void MyVector<T>::growCapacity() {
     reserve(new_capacity);
 }
 
+
+
+// Реализация методов iterator
+template <typename T>
+MyVector<T>::iterator::iterator(T* ptr) : m_ptr(ptr) {}
+
+template <typename T>
+T& MyVector<T>::iterator::operator*() const {
+    return *m_ptr;
+}
+
+template <typename T>
+T* MyVector<T>::iterator::get() const {
+    return m_ptr;
+}
+
+template <typename T>
+typename MyVector<T>::iterator& MyVector<T>::iterator::operator++() {
+    ++m_ptr;
+    return *this;
+}
+
+template <typename T>
+typename MyVector<T>::iterator MyVector<T>::iterator::operator++(int) {
+    iterator temp = *this;
+    ++m_ptr;
+    return temp;
+}
+
+template <typename T>
+bool MyVector<T>::iterator::operator==(const iterator& other) const {
+    return m_ptr == other.m_ptr;
+}
+
+template <typename T>
+bool MyVector<T>::iterator::operator!=(const iterator& other) const {
+    return m_ptr != other.m_ptr;
+}
+
+// Реализация методов const_iterator
+template <typename T>
+MyVector<T>::const_iterator::const_iterator(const T* ptr) : m_ptr(ptr) {}
+
+template <typename T>
+const T& MyVector<T>::const_iterator::operator*() const {
+    return *m_ptr;
+}
+
+template <typename T>
+const T* MyVector<T>::const_iterator::get() const {
+    return m_ptr;
+}
+
+template <typename T>
+typename MyVector<T>::const_iterator& MyVector<T>::const_iterator::operator++() {
+    ++m_ptr;
+    return *this;
+}
+
+template <typename T>
+typename MyVector<T>::const_iterator MyVector<T>::const_iterator::operator++(int) {
+    const_iterator temp = *this;
+    ++m_ptr;
+    return temp;
+}
+
+template <typename T>
+bool MyVector<T>::const_iterator::operator==(const const_iterator& other) const {
+    return m_ptr == other.m_ptr;
+}
+
+template <typename T>
+bool MyVector<T>::const_iterator::operator!=(const const_iterator& other) const {
+    return m_ptr != other.m_ptr;
+}
+
+
+// Реализация методов MyVector для итераторов
 template <typename T>
 typename MyVector<T>::iterator MyVector<T>::begin() noexcept {
-    return m_data;
+    return iterator(m_data);
 }
 
 template <typename T>
 typename MyVector<T>::iterator MyVector<T>::end() noexcept {
-    return m_data + m_size;
+    return iterator(m_data + m_size);
 }
 
 template <typename T>
 typename MyVector<T>::const_iterator MyVector<T>::begin() const noexcept {
-    return m_data;
+    return const_iterator(m_data);
 }
 
 template <typename T>
 typename MyVector<T>::const_iterator MyVector<T>::end() const noexcept {
-    return m_data + m_size;
+    return const_iterator(m_data + m_size);
 }
 
