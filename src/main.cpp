@@ -12,7 +12,10 @@ int main() {
     vec.push_back(7);
     vec.push_back(8);
     vec.push_back(9);
-    vec.push_back(10);
+    // vec.push_back(10);
 
+    vec.print();
+
+    vec.erase(0);
     vec.print();
 }
