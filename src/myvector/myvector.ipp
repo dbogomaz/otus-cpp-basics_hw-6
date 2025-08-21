@@ -8,7 +8,7 @@
 template <typename T>
 MyVector<T>::MyVector(const size_t size) : m_size{size} {
     if (m_size > 0) {
-        m_capacity = static_cast<size_t>(m_size * m_capacityFactor);
+        m_capacity = static_cast<size_t>(m_size * CAPACITY_FACTOR);
     }
     m_data = new T[m_capacity](); // скобки инициализируют элементы
 }
@@ -16,7 +16,7 @@ MyVector<T>::MyVector(const size_t size) : m_size{size} {
 template <typename T>
 MyVector<T>::MyVector(const std::initializer_list<T> initList) : m_size{initList.size()} {
     if (m_size > 0) {
-        m_capacity = static_cast<size_t>(m_size * m_capacityFactor);
+        m_capacity = static_cast<size_t>(m_size * CAPACITY_FACTOR);
     }
     m_data = new T[m_capacity];
 
@@ -42,7 +42,6 @@ template <typename T>
 void MyVector<T>::moveFrom(MyVector&& other) noexcept {
     m_capacity = other.m_capacity;
     m_size = other.m_size;
-    m_capacityFactor = other.m_capacityFactor;
     m_data = other.m_data;
 
     other.m_capacity = 0;

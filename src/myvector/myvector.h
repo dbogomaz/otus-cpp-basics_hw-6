@@ -23,15 +23,14 @@ public:
     const T &operator[](const size_t index) const;
 
 private:
-    size_t m_capacity{1};         // вместимость
-    size_t m_size{0};             // текущий размер
-    float m_capacityFactor{1.5};  // коэффициент выделения памяти
+    size_t m_capacity{1};                          // вместимость
+    size_t m_size{0};                              // текущий размер
+    static constexpr float CAPACITY_FACTOR{1.5f};  // коэффициент выделения памяти
     T *m_data{nullptr};
 
     void copyFrom(const MyVector &other);
-    void moveFrom(MyVector &&other) noexcept;    
+    void moveFrom(MyVector &&other) noexcept;
     void checkIndex(const size_t index, const char *function_name) const;
-
 };
 
 template <typename T>
