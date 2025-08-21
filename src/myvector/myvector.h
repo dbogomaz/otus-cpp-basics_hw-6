@@ -13,6 +13,7 @@ public:
     MyVector &operator=(MyVector &&other) noexcept;
     ~MyVector();
 
+    void push_back(const T& value);
     size_t capacity() const;
     size_t size() const;
     void reserve(const size_t new_capacity);

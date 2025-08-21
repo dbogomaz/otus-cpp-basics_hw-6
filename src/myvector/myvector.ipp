@@ -10,7 +10,7 @@ MyVector<T>::MyVector(const size_t size) : m_size{size} {
     if (m_size > 0) {
         m_capacity = static_cast<size_t>(m_size * CAPACITY_FACTOR);
     }
-    m_data = new T[m_capacity](); // скобки инициализируют элементы
+    m_data = new T[m_capacity]();  // скобки инициализируют элементы
 }
 
 template <typename T>
@@ -39,7 +39,7 @@ MyVector<T>::MyVector(MyVector &&other) noexcept {
 }
 
 template <typename T>
-void MyVector<T>::moveFrom(MyVector&& other) noexcept {
+void MyVector<T>::moveFrom(MyVector &&other) noexcept {
     m_capacity = other.m_capacity;
     m_size = other.m_size;
     m_data = other.m_data;
@@ -102,6 +102,15 @@ std::ostream &operator<<(std::ostream &os, const MyVector<T> &myVector) {
 template <typename T>
 MyVector<T>::~MyVector() {
     delete[] m_data;
+}
+
+template <typename T>
+void MyVector<T>::push_back(const T &value) {
+    if (m_size == m_capacity) {
+        reserve(m_capacity * CAPACITY_FACTOR);
+    }
+    m_data[m_size] = value;
+    ++m_size;
 }
 
 template <typename T>
