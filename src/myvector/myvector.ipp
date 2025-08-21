@@ -10,7 +10,7 @@ MyVector<T>::MyVector(const size_t size) : m_size{size} {
     if (m_size > 0) {
         m_capacity = static_cast<size_t>(m_size * m_capacityFactor);
     }
-    m_data = new T[m_capacity];
+    m_data = new T[m_capacity](); // скобки инициализируют элементы
 }
 
 template <typename T>
