@@ -204,3 +204,24 @@ void MyVector<T>::growCapacity() {
     }
     reserve(new_capacity);
 }
+
+template <typename T>
+typename MyVector<T>::iterator MyVector<T>::begin() noexcept {
+    return m_data;
+}
+
+template <typename T>
+typename MyVector<T>::iterator MyVector<T>::end() noexcept {
+    return m_data + m_size;
+}
+
+template <typename T>
+typename MyVector<T>::const_iterator MyVector<T>::begin() const noexcept {
+    return m_data;
+}
+
+template <typename T>
+typename MyVector<T>::const_iterator MyVector<T>::end() const noexcept {
+    return m_data + m_size;
+}
+

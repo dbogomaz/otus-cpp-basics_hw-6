@@ -22,6 +22,13 @@ public:
     T &at(const size_t index);
     const T &at(size_t index) const;
 
+    using iterator = T*;
+    using const_iterator = const T*;
+    iterator begin() noexcept;
+    iterator end() noexcept;
+    const_iterator begin() const noexcept;
+    const_iterator end() const noexcept;
+
     void print() const;
 
     T &operator[](const size_t index);
