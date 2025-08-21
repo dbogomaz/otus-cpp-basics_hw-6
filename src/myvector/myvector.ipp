@@ -119,9 +119,8 @@ template <typename T>
 void MyVector<T>::reserve(const size_t new_capacity) {
     if (new_capacity > m_capacity) {
         T *new_data = new T[new_capacity];
-        for (size_t i = 0; i < m_size; ++i) {
-            new_data[i] = m_data[i];
-        }
+        std::copy(m_data, m_data + m_size, new_data);
+
         delete[] m_data;
         m_data = new_data;
         m_capacity = new_capacity;
@@ -133,9 +132,8 @@ void MyVector<T>::copyFrom(const MyVector &other) {
     m_capacity = other.m_capacity;
     m_size = other.m_size;
     m_data = new T[m_capacity];
-    for (size_t i = 0; i < m_size; ++i) {
-        m_data[i] = other.m_data[i];
-    }
+
+    std::copy(other.m_data, other.m_data + m_size, m_data);
 }
 
 template <typename T>
