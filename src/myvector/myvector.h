@@ -15,6 +15,7 @@ public:
 
     void push_back(const T& value);
     void insert(const size_t index, const T& value);
+    void erase(const size_t index);
     size_t capacity() const;
     size_t size() const;
     void reserve(const size_t new_capacity);

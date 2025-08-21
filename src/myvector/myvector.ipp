@@ -147,6 +147,16 @@ void MyVector<T>::insert(const size_t index, const T &value) {
 }
 
 template <typename T>
+void MyVector<T>::erase(const size_t index) {
+    checkIndex(index, "erase");
+    for (size_t i = index; i < m_size - 1; i++) {
+        m_data[i] = m_data[i + 1];
+    }
+    --m_size;
+    m_data[m_size] = T();
+}
+
+template <typename T>
 size_t MyVector<T>::capacity() const {
     return m_capacity;
 }
