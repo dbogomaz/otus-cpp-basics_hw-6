@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cassert>
 #include "../src/myvector/myvector.h"
+#include "../src/mylist_1/mylist_1.h"
 
 namespace tests {
 
@@ -95,6 +96,7 @@ void containerTest() {
 }  // namespace tests
 
 int main() { 
-    tests::containerTest<MyVector<int>>();
+    // tests::containerTest<MyVector<int>>();
+    tests::containerTest<MyList_1<int>>();
     return 0;
 }
