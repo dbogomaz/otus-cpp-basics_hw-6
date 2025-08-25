@@ -1,7 +1,10 @@
+// file: main.cpp
 #include <iostream>
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
+#include "myvector/myvector.h"
 
-    return 0;
+int main() {
+    std::cout << "*****************" << std::endl;
+
+
 }
