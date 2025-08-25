@@ -80,6 +80,26 @@ MyVector<T> &MyVector<T>::operator=(MyVector &&other) noexcept {
 }
 
 template <typename T>
+bool MyVector<T>::operator==(const MyVector &other) const {
+    if (m_size != other.m_size) {
+        return false;
+    }
+    
+    for (size_t i = 0; i < m_size; ++i) {
+        if (m_data[i] != other.m_data[i]) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+template <typename T>
+bool MyVector<T>::operator!=(const MyVector &other) const {
+    return !(*this == other);
+}
+
+template <typename T>
 T &MyVector<T>::operator[](const size_t index) {
     checkIndex(index, "operator[]");
     return m_data[index];

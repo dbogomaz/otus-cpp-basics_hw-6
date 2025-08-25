@@ -14,6 +14,8 @@ public:
     MyVector(MyVector &&other) noexcept;
     MyVector &operator=(const MyVector &other);
     MyVector &operator=(MyVector &&other) noexcept;
+    bool operator==(const MyVector &other) const;
+    bool operator!=(const MyVector &other) const;
     ~MyVector();
 
     void push_back(const T &value);
