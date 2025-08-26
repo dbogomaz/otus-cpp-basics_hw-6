@@ -336,7 +336,7 @@ bool MyList_1<T>::const_iterator::operator!=(const const_iterator &other) const 
     return m_ptr != other.m_ptr;
 }
 
-// Реализация методов MyVector для итераторов
+// Реализация методов MyList_1 для итераторов
 template <typename T>
 typename MyList_1<T>::iterator MyList_1<T>::begin() noexcept {
     return iterator(m_data);

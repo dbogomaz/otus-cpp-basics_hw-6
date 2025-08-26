@@ -10,9 +10,9 @@ public:
     class iterator;
     class const_iterator;
 
-    explicit MyList_1(const size_t size = 0);
-    MyList_1(const std::initializer_list<T> initList);
-    MyList_1(const MyList_1 &other);
+    explicit MyList_1(const size_t size = 0); // конструктор по умолчанию и с параметром размера
+    MyList_1(const std::initializer_list<T> initList); // конструктор инициализации
+    MyList_1(const MyList_1 &other); // конструктор копирования
     MyList_1(MyList_1 &&other) noexcept;
     MyList_1 &operator=(const MyList_1 &other);
     MyList_1 &operator=(MyList_1 &&other) noexcept;
@@ -24,7 +24,7 @@ public:
     void insert(const size_t index, const T &value);
     void erase(const size_t index);
     size_t capacity() const;
-    size_t size() const;
+    size_t size() const; // текущий размер
     void reserve(const size_t new_capacity);
     T &at(const size_t index);
     const T &at(size_t index) const;
@@ -34,7 +34,7 @@ public:
     const_iterator begin() const noexcept;
     const_iterator end() const noexcept;
 
-    void print() const;
+    void print() const; // вывод в консоль
 
     T &operator[](const size_t index);
     const T &operator[](const size_t index) const;
@@ -47,10 +47,10 @@ private:
     Node *m_firstNode{nullptr};  // указатель на первый элемент
     Node *m_lastNode{nullptr};   // указатель на последний элемент
 
-    void copyFrom(const MyList_1 &other);
+    void copyFrom(const MyList_1 &other); // копирование из другого списка
     void moveFrom(MyList_1 &&other) noexcept;
-    void checkIndex(const size_t index, const char *function_name) const;
-    void growCapacity();  // увеличение вместимости
+    void checkIndex(const size_t index, const char *function_name) const; // проверка индекса
+    void growCapacity();
 };
 
 template <typename T>
