@@ -50,6 +50,7 @@ MyList_1<T>::MyList_1(MyList_1 &&other) noexcept {
 
 template <typename T>
 void MyList_1<T>::moveFrom(MyList_1 &&other) noexcept {
+    clear();
     m_size = other.m_size;
     m_firstNode = other.m_firstNode;
     m_lastNode = other.m_lastNode;
@@ -74,7 +75,7 @@ const T &MyList_1<T>::at(const size_t index) const {
 template <typename T>
 MyList_1<T> &MyList_1<T>::operator=(const MyList_1 &other) {
     if (this != &other) {
-        delete[] m_data;
+        clear();
         copyFrom(other);
     }
     return *this;
@@ -83,7 +84,7 @@ MyList_1<T> &MyList_1<T>::operator=(const MyList_1 &other) {
 template <typename T>
 MyList_1<T> &MyList_1<T>::operator=(MyList_1 &&other) noexcept {
     if (this != &other) {
-        delete[] m_data;
+        clear();
         moveFrom(std::move(other));
     }
     return *this;
@@ -153,7 +154,7 @@ std::ostream &operator<<(std::ostream &os, const MyList_1<T> &myVector) {
 
 template <typename T>
 MyList_1<T>::~MyList_1() {
-    delete[] m_data;
+    clear();
 }
 
 template <typename T>
@@ -189,6 +190,19 @@ void MyList_1<T>::erase(const size_t index) {
 }
 
 template <typename T>
+void MyList_1<T>::clear() {
+    Node *current = m_firstNode;
+    while (current != nullptr) {
+        Node *nextNode = current->next;
+        delete current;
+        current = nextNode;
+    }
+    m_firstNode = nullptr;
+    m_lastNode = nullptr;
+    m_size = 0;
+}
+
+template <typename T>
 size_t MyList_1<T>::capacity() const {
     return m_capacity;
 }
@@ -212,19 +226,11 @@ void MyList_1<T>::reserve(const size_t new_capacity) {
 
 template <typename T>
 void MyList_1<T>::copyFrom(const MyList_1 &other) {
-   // Очистка текущего списка
-    Node *current = m_firstNode;
-    while (current != nullptr) {
-        Node *nextNode = current->next;
-        delete current;
-        current = nextNode;
-    }
-    m_firstNode = nullptr;
-    m_lastNode = nullptr;
-
+    // Очистка текущего списка
+    clear();
     // Копирование из другого списка
     if (other.m_size > 0) {
-        Node* it = other.m_firstNode;
+        Node *it = other.m_firstNode;
         m_firstNode = new Node();
         m_firstNode->data = it->data;
         m_lastNode = m_firstNode;

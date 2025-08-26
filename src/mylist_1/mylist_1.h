@@ -14,8 +14,8 @@ public:
     MyList_1(const std::initializer_list<T> initList); // конструктор инициализации
     MyList_1(const MyList_1 &other); // конструктор копирования
     MyList_1(MyList_1 &&other) noexcept; // конструктор перемещения
-    MyList_1 &operator=(const MyList_1 &other);
-    MyList_1 &operator=(MyList_1 &&other) noexcept;
+    MyList_1 &operator=(const MyList_1 &other); // оператор присваивания копированием
+    MyList_1 &operator=(MyList_1 &&other) noexcept; // оператор присваивания перемещением
     bool operator==(const MyList_1 &other) const;
     bool operator!=(const MyList_1 &other) const;
     ~MyList_1();
@@ -23,6 +23,7 @@ public:
     void push_back(const T &value);
     void insert(const size_t index, const T &value);
     void erase(const size_t index);
+    void clear(); // очистка списка
     size_t capacity() const;
     size_t size() const; // текущий размер
     void reserve(const size_t new_capacity);
