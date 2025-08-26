@@ -225,7 +225,7 @@ template <typename T>
 void MyList_1<T>::checkIndex(const size_t index, const char *function_name) const {
     if (index >= m_size) {
         std::ostringstream oss;
-        oss << "MyVector::" << function_name << "(): index " << index
+        oss << "MyList_1::" << function_name << "(): index " << index
             << " out of range (size: " << m_size << ")";
         throw std::out_of_range(oss.str());
     }
