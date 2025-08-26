@@ -9,14 +9,10 @@ template <typename T>
 MyList_1<T>::MyList_1(const size_t size) : m_size{size} {
     if (m_size > 0) {
         m_firstNode = new Node();
-        m_firstNode->data = T();
-        m_firstNode->next = nullptr;
         m_lastNode = m_firstNode;
 
         for (size_t i = 1; i < m_size; i++) {
             Node *newNode = new Node();
-            newNode->data = T();
-            newNode->next = nullptr;
             m_lastNode->next = newNode;
             m_lastNode = newNode;
         }
@@ -27,19 +23,18 @@ MyList_1<T>::MyList_1(const size_t size) : m_size{size} {
 template <typename T>
 MyList_1<T>::MyList_1(const std::initializer_list<T> initList) : m_size{initList.size()} {
     if (m_size > 0) {
+        auto it = initList.begin();
         m_firstNode = new Node();
-        m_firstNode->data = *initList.begin();
-        m_firstNode->next = nullptr;
+        m_firstNode->data = *it;
         m_lastNode = m_firstNode;
-
-        const T *it = initList.begin();
+        ++it;
 
         for (size_t i = 1; i < m_size; i++) {
             Node *newNode = new Node();
-            newNode->data = *++it;
-            newNode->next = nullptr;
+            newNode->data = *it;
             m_lastNode->next = newNode;
             m_lastNode = newNode;
+            ++it;
         }
     }
     printFull();
@@ -152,16 +147,14 @@ void MyList_1<T>::printFull() const {
     std::cout << "---------------------" << std::endl;
 
     while (current != nullptr) {
-        std::cout << "Node " << index++ 
-                  << " " << current 
-                  << ": data = " << current->data
+        std::cout << "Node " << index++ << " " << current << ": data = " << current->data
                   << ", next = " << current->next << std::endl;
         current = current->next;
     }
 
-  if (m_size == 0) {
+    if (m_size == 0) {
         std::cout << "List is empty" << std::endl;
-    }  
+    }
 }
 
 template <typename T>

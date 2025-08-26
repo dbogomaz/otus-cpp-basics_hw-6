@@ -58,7 +58,7 @@ template <typename T>
 class MyList_1<T>::Node {
 public:
     Node *next{nullptr};  // указатель на следующий элемент
-    T data;               // данные элемента
+    T data{};             // данные элемента
 };
 
 template <typename T>
