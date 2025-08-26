@@ -13,7 +13,7 @@ public:
     explicit MyList_1(const size_t size = 0); // конструктор по умолчанию и с параметром размера
     MyList_1(const std::initializer_list<T> initList); // конструктор инициализации
     MyList_1(const MyList_1 &other); // конструктор копирования
-    MyList_1(MyList_1 &&other) noexcept;
+    MyList_1(MyList_1 &&other) noexcept; // конструктор перемещения
     MyList_1 &operator=(const MyList_1 &other);
     MyList_1 &operator=(MyList_1 &&other) noexcept;
     bool operator==(const MyList_1 &other) const;
@@ -48,7 +48,7 @@ private:
     Node *m_lastNode{nullptr};   // указатель на последний элемент
 
     void copyFrom(const MyList_1 &other); // копирование из другого списка
-    void moveFrom(MyList_1 &&other) noexcept;
+    void moveFrom(MyList_1 &&other) noexcept; // перемещение из другого списка
     void checkIndex(const size_t index, const char *function_name) const; // проверка индекса
     void growCapacity();
 };
