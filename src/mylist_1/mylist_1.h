@@ -5,6 +5,8 @@
 template <typename T>
 class MyList_1 {
 public:
+    class Node;
+
     class iterator;
     class const_iterator;
 
@@ -33,6 +35,7 @@ public:
     const_iterator end() const noexcept;
 
     void print() const;
+    void printFull() const;
 
     T &operator[](const size_t index);
     const T &operator[](const size_t index) const;
@@ -42,11 +45,20 @@ private:
     size_t m_size{0};                              // текущий размер
     static constexpr float CAPACITY_FACTOR{1.5f};  // коэффициент выделения памяти
     T *m_data{nullptr};
+    Node *m_firstNode{nullptr};  // указатель на первый элемент
+    Node *m_lastNode{nullptr};   // указатель на последний элемент
 
     void copyFrom(const MyList_1 &other);
     void moveFrom(MyList_1 &&other) noexcept;
     void checkIndex(const size_t index, const char *function_name) const;
     void growCapacity();  // увеличение вместимости
+};
+
+template <typename T>
+class MyList_1<T>::Node {
+public:
+    Node *next{nullptr};  // указатель на следующий элемент
+    T data;               // данные элемента
 };
 
 template <typename T>

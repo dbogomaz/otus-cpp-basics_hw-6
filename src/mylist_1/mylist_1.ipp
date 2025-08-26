@@ -8,9 +8,20 @@
 template <typename T>
 MyList_1<T>::MyList_1(const size_t size) : m_size{size} {
     if (m_size > 0) {
-        m_capacity = static_cast<size_t>(m_size * CAPACITY_FACTOR);
+        m_firstNode = new Node();
+        m_firstNode->data = T();
+        m_firstNode->next = nullptr;
+        m_lastNode = m_firstNode;
+
+        for (size_t i = 1; i < m_size; i++) {
+            Node *newNode = new Node();
+            newNode->data = T();
+            newNode->next = nullptr;
+            m_lastNode->next = newNode;
+            m_lastNode = newNode;
+        }
     }
-    m_data = new T[m_capacity]();  // скобки инициализируют элементы
+    printFull();
 }
 
 template <typename T>
@@ -84,13 +95,13 @@ bool MyList_1<T>::operator==(const MyList_1 &other) const {
     if (m_size != other.m_size) {
         return false;
     }
-    
+
     for (size_t i = 0; i < m_size; ++i) {
         if (m_data[i] != other.m_data[i]) {
             return false;
         }
     }
-    
+
     return true;
 }
 
@@ -121,6 +132,30 @@ void MyList_1<T>::print() const {
         std::cout << m_data[i] << " ";
     }
     std::cout << std::endl;
+}
+
+template <typename T>
+void MyList_1<T>::printFull() const {
+    Node *current = m_firstNode;
+    size_t index = 0;
+
+    std::cout << "=== List Contents ===" << std::endl;
+    std::cout << " Size: " << m_size << std::endl;
+    std::cout << "First: " << m_firstNode << std::endl;
+    std::cout << " Last: " << m_lastNode << std::endl;
+    std::cout << "---------------------" << std::endl;
+
+    while (current != nullptr) {
+        std::cout << "Node " << index++ 
+                  << " " << current 
+                  << ": data = " << current->data
+                  << ", next = " << current->next << std::endl;
+        current = current->next;
+    }
+
+  if (m_size == 0) {
+        std::cout << "List is empty" << std::endl;
+    }  
 }
 
 template <typename T>
@@ -225,24 +260,22 @@ void MyList_1<T>::growCapacity() {
     reserve(new_capacity);
 }
 
-
-
 // Реализация методов iterator
 template <typename T>
-MyList_1<T>::iterator::iterator(T* ptr) : m_ptr(ptr) {}
+MyList_1<T>::iterator::iterator(T *ptr) : m_ptr(ptr) {}
 
 template <typename T>
-T& MyList_1<T>::iterator::operator*() const {
+T &MyList_1<T>::iterator::operator*() const {
     return *m_ptr;
 }
 
 template <typename T>
-T* MyList_1<T>::iterator::get() const {
+T *MyList_1<T>::iterator::get() const {
     return m_ptr;
 }
 
 template <typename T>
-typename MyList_1<T>::iterator& MyList_1<T>::iterator::operator++() {
+typename MyList_1<T>::iterator &MyList_1<T>::iterator::operator++() {
     ++m_ptr;
     return *this;
 }
@@ -255,31 +288,31 @@ typename MyList_1<T>::iterator MyList_1<T>::iterator::operator++(int) {
 }
 
 template <typename T>
-bool MyList_1<T>::iterator::operator==(const iterator& other) const {
+bool MyList_1<T>::iterator::operator==(const iterator &other) const {
     return m_ptr == other.m_ptr;
 }
 
 template <typename T>
-bool MyList_1<T>::iterator::operator!=(const iterator& other) const {
+bool MyList_1<T>::iterator::operator!=(const iterator &other) const {
     return m_ptr != other.m_ptr;
 }
 
 // Реализация методов const_iterator
 template <typename T>
-MyList_1<T>::const_iterator::const_iterator(const T* ptr) : m_ptr(ptr) {}
+MyList_1<T>::const_iterator::const_iterator(const T *ptr) : m_ptr(ptr) {}
 
 template <typename T>
-const T& MyList_1<T>::const_iterator::operator*() const {
+const T &MyList_1<T>::const_iterator::operator*() const {
     return *m_ptr;
 }
 
 template <typename T>
-const T* MyList_1<T>::const_iterator::get() const {
+const T *MyList_1<T>::const_iterator::get() const {
     return m_ptr;
 }
 
 template <typename T>
-typename MyList_1<T>::const_iterator& MyList_1<T>::const_iterator::operator++() {
+typename MyList_1<T>::const_iterator &MyList_1<T>::const_iterator::operator++() {
     ++m_ptr;
     return *this;
 }
@@ -292,15 +325,14 @@ typename MyList_1<T>::const_iterator MyList_1<T>::const_iterator::operator++(int
 }
 
 template <typename T>
-bool MyList_1<T>::const_iterator::operator==(const const_iterator& other) const {
+bool MyList_1<T>::const_iterator::operator==(const const_iterator &other) const {
     return m_ptr == other.m_ptr;
 }
 
 template <typename T>
-bool MyList_1<T>::const_iterator::operator!=(const const_iterator& other) const {
+bool MyList_1<T>::const_iterator::operator!=(const const_iterator &other) const {
     return m_ptr != other.m_ptr;
 }
-
 
 // Реализация методов MyVector для итераторов
 template <typename T>
@@ -322,4 +354,3 @@ template <typename T>
 typename MyList_1<T>::const_iterator MyList_1<T>::end() const noexcept {
     return const_iterator(m_data + m_size);
 }
-
