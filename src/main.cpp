@@ -7,7 +7,7 @@
 int main() {
     std::cout << "*****************" << std::endl;
 
-    MyList_1<int> list(3);
+    MyList_1<int> list{0, 1, 2, 3, 4};
 
 
     return 0;

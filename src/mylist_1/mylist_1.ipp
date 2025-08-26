@@ -27,16 +27,22 @@ MyList_1<T>::MyList_1(const size_t size) : m_size{size} {
 template <typename T>
 MyList_1<T>::MyList_1(const std::initializer_list<T> initList) : m_size{initList.size()} {
     if (m_size > 0) {
-        m_capacity = static_cast<size_t>(m_size * CAPACITY_FACTOR);
-    }
-    m_data = new T[m_capacity];
+        m_firstNode = new Node();
+        m_firstNode->data = *initList.begin();
+        m_firstNode->next = nullptr;
+        m_lastNode = m_firstNode;
 
-    if (m_size > 0) {
-        size_t i = 0;
-        for (const auto &item : initList) {
-            m_data[i++] = item;
+        const T *it = initList.begin();
+
+        for (size_t i = 1; i < m_size; i++) {
+            Node *newNode = new Node();
+            newNode->data = *++it;
+            newNode->next = nullptr;
+            m_lastNode->next = newNode;
+            m_lastNode = newNode;
         }
     }
+    printFull();
 }
 
 template <typename T>
