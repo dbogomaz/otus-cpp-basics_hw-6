@@ -35,7 +35,6 @@ public:
     const_iterator end() const noexcept;
 
     void print() const;
-    void printFull() const;
 
     T &operator[](const size_t index);
     const T &operator[](const size_t index) const;

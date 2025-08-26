@@ -17,7 +17,7 @@ MyList_1<T>::MyList_1(const size_t size) : m_size{size} {
             m_lastNode = newNode;
         }
     }
-    printFull();
+    print();
 }
 
 template <typename T>
@@ -37,7 +37,7 @@ MyList_1<T>::MyList_1(const std::initializer_list<T> initList) : m_size{initList
             ++it;
         }
     }
-    printFull();
+    print();
 }
 
 template <typename T>
@@ -119,24 +119,6 @@ T &MyList_1<T>::operator[](const size_t index) {
 
 template <typename T>
 void MyList_1<T>::print() const {
-    std::cout << "MyList_1" << std::endl;
-
-    std::cout << "\tm_size: " << m_size << std::endl;
-    std::cout << "\tm_data: ";
-    for (size_t i = 0; i < m_size; ++i) {
-        std::cout << m_data[i] << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "\tm_capacity: " << m_capacity << std::endl;
-    std::cout << "\tm_data: ";
-    for (size_t i = 0; i < m_capacity; ++i) {
-        std::cout << m_data[i] << " ";
-    }
-    std::cout << std::endl;
-}
-
-template <typename T>
-void MyList_1<T>::printFull() const {
     Node *current = m_firstNode;
     size_t index = 0;
 
