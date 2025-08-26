@@ -17,7 +17,6 @@ MyList_1<T>::MyList_1(const size_t size) : m_size{size} {
             m_lastNode = newNode;
         }
     }
-    print();
 }
 
 template <typename T>
@@ -37,7 +36,6 @@ MyList_1<T>::MyList_1(const std::initializer_list<T> initList) : m_size{initList
             ++it;
         }
     }
-    print();
 }
 
 template <typename T>
@@ -214,11 +212,34 @@ void MyList_1<T>::reserve(const size_t new_capacity) {
 
 template <typename T>
 void MyList_1<T>::copyFrom(const MyList_1 &other) {
-    m_capacity = other.m_capacity;
-    m_size = other.m_size;
-    m_data = new T[m_capacity];
+   // Очистка текущего списка
+    Node *current = m_firstNode;
+    while (current != nullptr) {
+        Node *nextNode = current->next;
+        delete current;
+        current = nextNode;
+    }
+    m_firstNode = nullptr;
+    m_lastNode = nullptr;
 
-    std::copy(other.m_data, other.m_data + m_size, m_data);
+    // Копирование из другого списка
+    if (other.m_size > 0) {
+        Node* it = other.m_firstNode;
+        m_firstNode = new Node();
+        m_firstNode->data = it->data;
+        m_lastNode = m_firstNode;
+        it = it->next;
+
+        for (size_t i = 1; i < other.m_size; i++) {
+            Node *newNode = new Node();
+            newNode->data = it->data;
+            m_lastNode->next = newNode;
+            m_lastNode = newNode;
+            it = it->next;
+        }
+        m_lastNode->next = nullptr;
+        m_size = other.m_size;
+    }
 }
 
 template <typename T>
