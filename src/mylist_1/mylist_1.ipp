@@ -50,13 +50,13 @@ MyList_1<T>::MyList_1(MyList_1 &&other) noexcept {
 
 template <typename T>
 void MyList_1<T>::moveFrom(MyList_1 &&other) noexcept {
-    m_capacity = other.m_capacity;
     m_size = other.m_size;
-    m_data = other.m_data;
+    m_firstNode = other.m_firstNode;
+    m_lastNode = other.m_lastNode;
 
-    other.m_capacity = 0;
     other.m_size = 0;
-    other.m_data = nullptr;
+    other.m_firstNode = nullptr;
+    other.m_lastNode = nullptr;
 }
 
 template <typename T>
