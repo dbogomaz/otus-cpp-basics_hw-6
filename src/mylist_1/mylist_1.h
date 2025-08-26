@@ -18,7 +18,7 @@ public:
     MyList_1 &operator=(MyList_1 &&other) noexcept; // оператор присваивания перемещением
     bool operator==(const MyList_1 &other) const;
     bool operator!=(const MyList_1 &other) const;
-    ~MyList_1();
+    ~MyList_1(); // деструктор
 
     void push_back(const T &value);
     void insert(const size_t index, const T &value);
@@ -27,8 +27,11 @@ public:
     size_t capacity() const;
     size_t size() const; // текущий размер
     void reserve(const size_t new_capacity);
+    
     T &at(const size_t index);
     const T &at(size_t index) const;
+    T &operator[](const size_t index);
+    const T &operator[](const size_t index) const;
 
     iterator begin() noexcept;
     iterator end() noexcept;
@@ -37,8 +40,7 @@ public:
 
     void print() const; // вывод в консоль
 
-    T &operator[](const size_t index);
-    const T &operator[](const size_t index) const;
+
 
 private:
     size_t m_capacity{1};                          // вместимость

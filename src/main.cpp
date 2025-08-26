@@ -13,6 +13,8 @@ int main() {
     MyList_1<int> list2 = MyList_1<int>{5, 6, 7, 8, 9};
     list2.print();
     std::cout << std::endl;
+    std::cout << "List1: " << list << std::endl;
+    std::cout << "List2: " << list2 << std::endl;
 
 
 
