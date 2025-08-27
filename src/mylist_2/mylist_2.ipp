@@ -279,6 +279,7 @@ void MyList_2<T>::copyFrom(const MyList_2 &other) {
             Node *newNode = new Node();
             newNode->data = it->data;
             m_lastNode->next = newNode;
+            newNode->prev = m_lastNode;
             m_lastNode = newNode;
             it = it->next;
         }
