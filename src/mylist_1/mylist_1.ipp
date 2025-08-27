@@ -5,8 +5,6 @@
 
 #include "mylist_1.h"
 
-// --- Конструкторы и оператор присваивания ---
-
 // Конструктор по умолчанию и с параметром размера
 template <typename T>
 MyList_1<T>::MyList_1(const size_t size) : m_size{size} {
@@ -21,7 +19,7 @@ MyList_1<T>::MyList_1(const size_t size) : m_size{size} {
     }
 }
 
-// Конструктор инициализации
+// Конструктор инициализации списком
 template <typename T>
 MyList_1<T>::MyList_1(const std::initializer_list<T> initList) : m_size{initList.size()} {
     if (m_size > 0) {
@@ -75,9 +73,13 @@ MyList_1<T> &MyList_1<T>::operator=(MyList_1 &&other) noexcept {
 // Операторы сравнения
 template <typename T>
 bool MyList_1<T>::operator==(const MyList_1 &other) const {
-    if (m_size != other.m_size) {
-        return false;
-    }
+    // Если оба списка пустые - они равны
+    if (m_size == 0 && other.m_size == 0) return true;
+    
+    // Если размеры разные - списки не равны
+    if (m_size != other.m_size) return false;
+
+    // Сравнение по элементам
     Node *a = m_firstNode;
     Node *b = other.m_firstNode;
     while (a && b) {

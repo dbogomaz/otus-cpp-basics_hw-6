@@ -11,13 +11,13 @@ public:
     class const_iterator;
 
     explicit MyList_1(const size_t size = 0); // конструктор по умолчанию и с параметром размера
-    MyList_1(const std::initializer_list<T> initList); // конструктор инициализации
+    MyList_1(const std::initializer_list<T> initList); // конструктор инициализации списком
     MyList_1(const MyList_1 &other); // конструктор копирования
     MyList_1(MyList_1 &&other) noexcept; // конструктор перемещения
     MyList_1 &operator=(const MyList_1 &other); // оператор присваивания копированием
     MyList_1 &operator=(MyList_1 &&other) noexcept; // оператор присваивания перемещением
-    bool operator==(const MyList_1 &other) const;
-    bool operator!=(const MyList_1 &other) const;
+    bool operator==(const MyList_1 &other) const; // оператор сравнения
+    bool operator!=(const MyList_1 &other) const; // оператора сравнения
     ~MyList_1(); // деструктор
 
     void push_back(const T &value);
