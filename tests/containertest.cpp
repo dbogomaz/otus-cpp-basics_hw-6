@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cassert>
 #include "../src/myvector/myvector.h"
+#include "../src/mylist_1/mylist_1.h"
 
 namespace tests {
 
@@ -87,7 +88,6 @@ void containerTest() {
     
     // Дополнительные тесты
     std::cout << "Final size: " << container.size() << std::endl;
-    std::cout << "Final capacity: " << container.capacity() << std::endl;
     
     std::cout << "=== All tests passed! ===" << std::endl << std::endl;
 }
@@ -96,5 +96,6 @@ void containerTest() {
 
 int main() { 
     tests::containerTest<MyVector<int>>();
+    tests::containerTest<MyList_1<int>>();
     return 0;
 }
