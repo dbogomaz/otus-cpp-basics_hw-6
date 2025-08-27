@@ -11,7 +11,6 @@ MyList_2<T>::MyList_2(const size_t size) : m_size{size} {
     if (m_size > 0) {
         m_firstNode = new Node();
         m_lastNode = m_firstNode;
-        Node *prevNode{m_firstNode};
         for (size_t i = 1; i < m_size; i++) {
             Node *newNode = new Node();
             m_lastNode->next = newNode;
@@ -34,6 +33,7 @@ MyList_2<T>::MyList_2(const std::initializer_list<T> initList) : m_size{initList
             Node *newNode = new Node();
             newNode->data = *it;
             m_lastNode->next = newNode;
+            newNode->prev = m_lastNode;
             m_lastNode = newNode;
             ++it;
         }

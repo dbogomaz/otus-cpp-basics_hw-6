@@ -9,8 +9,7 @@
 int main() {
     std::cout << std::endl;
 
-    // MyList_2<int> list{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    MyList_2<int> list(5);
+    MyList_2<int> list{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     list.print();
     std::cout << std::endl;
 
