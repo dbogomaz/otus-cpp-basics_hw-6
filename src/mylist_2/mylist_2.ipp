@@ -170,6 +170,9 @@ void MyList_2<T>::erase(const size_t index) {
         }
         toDelete = prev->next;
         prev->next = toDelete->next;
+        if(toDelete->next) {
+            toDelete->next->prev = prev;
+        }
         if (prev->next == nullptr) {
             m_lastNode = prev;
         }

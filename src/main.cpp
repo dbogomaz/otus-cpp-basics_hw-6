@@ -12,7 +12,7 @@ int main() {
     MyList_2<int> list{0, 1, 2, 3, 4};
     list.print();
     std::cout << std::endl;
-    list.insert(1, 777);
+    list.erase(4);
     list.print();
 
 
