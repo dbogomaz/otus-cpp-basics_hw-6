@@ -11,9 +11,11 @@ MyList_2<T>::MyList_2(const size_t size) : m_size{size} {
     if (m_size > 0) {
         m_firstNode = new Node();
         m_lastNode = m_firstNode;
+        Node *prevNode{m_firstNode};
         for (size_t i = 1; i < m_size; i++) {
             Node *newNode = new Node();
             m_lastNode->next = newNode;
+            newNode->prev = m_lastNode;
             m_lastNode = newNode;
         }
     }
@@ -253,8 +255,8 @@ void MyList_2<T>::print() const {
     std::cout << " Last: " << m_lastNode << std::endl;
     std::cout << "---------------------" << std::endl;
     while (current != nullptr) {
-        std::cout << "Node " << index++ << " " << current << ": data = " << current->data
-                  << ", next = " << current->next << std::endl;
+        std::cout << "Node-" << index++ << " " << current << "\n\tprev = " << current->prev
+                  << "\n\tnext = " << current->next << "\n\tdata = " << current->data << std::endl;
         current = current->next;
     }
     if (m_size == 0) {
