@@ -41,9 +41,9 @@ public:
 
 
 private:
-    size_t m_size{0};                              // текущий размер
-    Node *m_firstNode{nullptr};  // указатель на первый элемент
-    Node *m_lastNode{nullptr};   // указатель на последний элемент
+    size_t m_size{0};           // текущий размер
+    Node *m_firstNode{nullptr}; // указатель на первый элемент
+    Node *m_lastNode{nullptr};  // указатель на последний элемент
 
     void copyFrom(const MyList_1 &other); // копирование из другого списка
     void moveFrom(MyList_1 &&other) noexcept; // перемещение из другого списка
@@ -60,7 +60,7 @@ public:
 template <typename T>
 class MyList_1<T>::iterator {
 public:
-    explicit iterator(T *ptr = nullptr);
+    explicit iterator(Node* node = nullptr);
     T &operator*() const;
     T *get() const;
     iterator &operator++();
@@ -69,13 +69,13 @@ public:
     bool operator!=(const iterator &other) const;
 
 private:
-    T *m_ptr;
+    Node* m_node; 
 };
 
 template <typename T>
 class MyList_1<T>::const_iterator {
 public:
-    explicit const_iterator(const T *ptr = nullptr);
+    explicit const_iterator(const Node* node = nullptr);
     const T &operator*() const;
     const T *get() const;
     const_iterator &operator++();
@@ -84,7 +84,7 @@ public:
     bool operator!=(const const_iterator &other) const;
 
 private:
-    const T *m_ptr;
+    Node* m_node;
 };
 
 template <typename T>

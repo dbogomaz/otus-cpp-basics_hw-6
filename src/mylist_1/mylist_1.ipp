@@ -225,7 +225,7 @@ const T &MyList_1<T>::operator[](const size_t index) const {
 
 template <typename T>
 typename MyList_1<T>::iterator MyList_1<T>::begin() noexcept {
-    return iterator(m_firstNode ? &m_firstNode->data : nullptr);
+    return iterator(m_firstNode);
 }
 
 template <typename T>
@@ -235,7 +235,7 @@ typename MyList_1<T>::iterator MyList_1<T>::end() noexcept {
 
 template <typename T>
 typename MyList_1<T>::const_iterator MyList_1<T>::begin() const noexcept {
-    return const_iterator(m_firstNode ? &m_firstNode->data : nullptr);
+    return const_iterator(m_firstNode);
 }
 
 template <typename T>
@@ -309,77 +309,81 @@ void MyList_1<T>::checkIndex(const size_t index, const char *function_name) cons
 // --- Реализация методов iterator ---
 
 template <typename T>
-MyList_1<T>::iterator::iterator(T *ptr) : m_ptr(ptr) {}
+MyList_1<T>::iterator::iterator(Node *node) : m_node(node) {}
 
 template <typename T>
 T &MyList_1<T>::iterator::operator*() const {
-    return *m_ptr;
+    return m_node->data;
 }
 
 template <typename T>
 T *MyList_1<T>::iterator::get() const {
-    return m_ptr;
+    return &m_node->data;
 }
 
 template <typename T>
 typename MyList_1<T>::iterator &MyList_1<T>::iterator::operator++() {
-    ++m_ptr;
+    if (m_node) {
+        m_node = m_node->next;
+    }
     return *this;
 }
 
 template <typename T>
 typename MyList_1<T>::iterator MyList_1<T>::iterator::operator++(int) {
     iterator temp = *this;
-    ++m_ptr;
+    ++(*this);
     return temp;
 }
 
 template <typename T>
 bool MyList_1<T>::iterator::operator==(const iterator &other) const {
-    return m_ptr == other.m_ptr;
+    return m_node == other.m_node;
 }
 
 template <typename T>
 bool MyList_1<T>::iterator::operator!=(const iterator &other) const {
-    return m_ptr != other.m_ptr;
+    return m_node != other.m_node;
 }
 
 // --- Реализация методов const_iterator ---
 
 template <typename T>
-MyList_1<T>::const_iterator::const_iterator(const T *ptr) : m_ptr(ptr) {}
+MyList_1<T>::const_iterator::const_iterator(const Node *node) : m_node(node) {}
 
 template <typename T>
 const T &MyList_1<T>::const_iterator::operator*() const {
-    return *m_ptr;
+    return m_node->data;
 }
 
 template <typename T>
 const T *MyList_1<T>::const_iterator::get() const {
-    return m_ptr;
+    return &m_node->data;
 }
 
 template <typename T>
 typename MyList_1<T>::const_iterator &MyList_1<T>::const_iterator::operator++() {
-    ++m_ptr;
+    if (m_node) {
+        m_node = m_node->next;
+    }
     return *this;
 }
 
 template <typename T>
 typename MyList_1<T>::const_iterator MyList_1<T>::const_iterator::operator++(int) {
     const_iterator temp = *this;
-    ++m_ptr;
+    ++(*this);
     return temp;
 }
 
 template <typename T>
 bool MyList_1<T>::const_iterator::operator==(const const_iterator &other) const {
-    return m_ptr == other.m_ptr;
+    return m_node == other.m_node;
 }
 
 template <typename T>
 bool MyList_1<T>::const_iterator::operator!=(const const_iterator &other) const {
-    return m_ptr != other.m_ptr;
+    return m_node != other.m_node;
 }
 
 template <typename T>
