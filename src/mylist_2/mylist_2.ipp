@@ -140,8 +140,12 @@ void MyList_2<T>::insert(const size_t index, const T &value) {
             prevNode = prevNode->next;
         }
         newNode->next = prevNode->next;
-        newNode->prev = prevNode;
         prevNode->next = newNode;
+
+        newNode->prev = prevNode;
+        if (newNode->next) {
+            newNode->next->prev = newNode;
+        }
     }
     ++m_size;
 }
