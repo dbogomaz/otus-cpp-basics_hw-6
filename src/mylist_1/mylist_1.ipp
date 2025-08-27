@@ -195,7 +195,9 @@ template <typename T>
 T &MyList_1<T>::at(const size_t index) {
     checkIndex(index, "at");
     Node *current = m_firstNode;
-    for (size_t i = 0; i < index; ++i) current = current->next;
+    for (size_t i = 0; i < index; ++i) {
+        current = current->next;
+    }
     return current->data;
 }
 
@@ -203,7 +205,9 @@ template <typename T>
 const T &MyList_1<T>::at(size_t index) const {
     checkIndex(index, "at");
     Node *current = m_firstNode;
-    for (size_t i = 0; i < index; ++i) current = current->next;
+    for (size_t i = 0; i < index; ++i) {
+        current = current->next;
+    }
     return current->data;
 }
 
