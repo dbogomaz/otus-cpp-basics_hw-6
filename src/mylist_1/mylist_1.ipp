@@ -75,7 +75,7 @@ template <typename T>
 bool MyList_1<T>::operator==(const MyList_1 &other) const {
     // Если оба списка пустые - они равны
     if (m_size == 0 && other.m_size == 0) return true;
-    
+
     // Если размеры разные - списки не равны
     if (m_size != other.m_size) return false;
 
@@ -119,19 +119,24 @@ void MyList_1<T>::push_back(const T &value) {
 
 template <typename T>
 void MyList_1<T>::insert(const size_t index, const T &value) {
+    if (index == m_size) {
+        push_back(value);
+        return;
+    }
     checkIndex(index, "insert");
     Node *newNode = new Node();
     newNode->data = value;
+    // вставка в начало
     if (index == 0) {
         newNode->next = m_firstNode;
         m_firstNode = newNode;
-        if (m_size == 0) m_lastNode = newNode;
     } else {
         Node *prev = m_firstNode;
-        for (size_t i = 0; i < index - 1; ++i) prev = prev->next;
+        for (size_t i = 0; i < index - 1; ++i) {
+            prev = prev->next;
+        }
         newNode->next = prev->next;
         prev->next = newNode;
-        if (newNode->next == nullptr) m_lastNode = newNode;
     }
     ++m_size;
 }
@@ -387,7 +392,7 @@ bool MyList_1<T>::const_iterator::operator!=(const const_iterator &other) const 
 
 template <typename T>
 std::ostream &operator<<(std::ostream &os, const MyList_1<T> &myList) {
-    for (const auto& item : myList) {
+    for (const auto &item : myList) {
         os << item << " ";
     }
     return os;
