@@ -7,32 +7,48 @@
 int main() {
     std::cout << std::endl;
 
-    MyList_1<int> list;
+    MyList_1<int> list{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    // list.print();
+    std::cout << std::endl;
+
+    // std::cout << "Удаление из пустого списка" << std::endl;
+    // list = MyList_1<int>();
+    // list.erase(0);
+    // list.print();
+    // std::cout << std::endl;
+
+    std::cout << "Удаление единственного элемента (index = 0)" << std::endl;
+    list = {777};
+    list.print();
+    std::cout << std::endl;
+    list.erase(0);
     list.print();
     std::cout << std::endl;
 
-    std::cout << "Вставка в пустой список (index = 0)" << std::endl;
-    list.insert(0, 2);
+    std::cout << "Удаление первого элемента из списка" << std::endl;
+    list = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    list.print();
+    list.erase(0);
     list.print();
     std::cout << std::endl;
 
-    std::cout << "Вставка в начало непустого списка (index = 0)" << std::endl;
-    list.insert(0, 0);
+    std::cout << "Удаление последнего элемента из списка" << std::endl;
+    list.erase(list.size() - 1);
     list.print();
     std::cout << std::endl;
 
-    std::cout << "Вставка в конец списка (index = size)" << std::endl;
-    list.insert(list.size(), 4);
+    std::cout << "Удаление предпоследнего элемента" << std::endl;
+    list.erase(list.size() - 2);
     list.print();
     std::cout << std::endl;
 
-    std::cout << "Вставка сразу после начала (index = 1)" << std::endl;
-    list.insert(1, 1);
+    std::cout << "Удаление из середины списка" << std::endl;
+    list.erase(4);
     list.print();
     std::cout << std::endl;
 
-    std::cout << "Вставка сразу перед концом (index = size-1)" << std::endl;
-    list.insert(list.size() - 1, 3);
+    std::cout << "Удаление с index >= size" << std::endl;
+    list.erase(11);
     list.print();
     std::cout << std::endl;
 

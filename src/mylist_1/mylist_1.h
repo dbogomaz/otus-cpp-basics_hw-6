@@ -21,8 +21,8 @@ public:
     ~MyList_1(); // деструктор
 
     void push_back(const T &value); // добавление элемента в конец списка
-    void insert(const size_t index, const T &value);
-    void erase(const size_t index);
+    void insert(const size_t index, const T &value); // добавление по индексу
+    void erase(const size_t index); // удаление по индексу
     void clear(); // очистка списка
     size_t capacity() const;
     size_t size() const; // текущий размер

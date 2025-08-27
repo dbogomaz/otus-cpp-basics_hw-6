@@ -146,15 +146,24 @@ void MyList_1<T>::erase(const size_t index) {
     checkIndex(index, "erase");
     Node *toDelete = nullptr;
     if (index == 0) {
+        // Удаление первого элемента
         toDelete = m_firstNode;
         m_firstNode = m_firstNode->next;
-        if (m_firstNode == nullptr) m_lastNode = nullptr;
+        // Если список стал пустым
+        if (m_firstNode == nullptr) {
+            m_lastNode = nullptr;
+        }
     } else {
+        // Поиск узла, предшествующего удаляемому
         Node *prev = m_firstNode;
-        for (size_t i = 0; i < index - 1; ++i) prev = prev->next;
+        for (size_t i = 0; i < index - 1; ++i) {
+            prev = prev->next;
+        }
         toDelete = prev->next;
         prev->next = toDelete->next;
-        if (prev->next == nullptr) m_lastNode = prev;
+        if (prev->next == nullptr) {
+            m_lastNode = prev;
+        }
     }
     delete toDelete;
     --m_size;
