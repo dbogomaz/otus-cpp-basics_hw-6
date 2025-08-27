@@ -158,8 +158,10 @@ void MyList_2<T>::erase(const size_t index) {
         // Удаление первого элемента
         toDelete = m_firstNode;
         m_firstNode = m_firstNode->next;
-        // Если список стал пустым
-        if (m_firstNode == nullptr) {
+       
+        if (m_firstNode != nullptr) {
+            m_firstNode->prev = nullptr;
+        } else {
             m_lastNode = nullptr;
         }
     } else {
