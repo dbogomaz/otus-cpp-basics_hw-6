@@ -158,7 +158,7 @@ void MyList_2<T>::erase(const size_t index) {
         // Удаление первого элемента
         toDelete = m_firstNode;
         m_firstNode = m_firstNode->next;
-       
+
         if (m_firstNode != nullptr) {
             m_firstNode->prev = nullptr;
         } else {
@@ -172,7 +172,7 @@ void MyList_2<T>::erase(const size_t index) {
         }
         toDelete = prev->next;
         prev->next = toDelete->next;
-        if(toDelete->next) {
+        if (toDelete->next) {
             toDelete->next->prev = prev;
         }
         if (prev->next == nullptr) {
@@ -239,22 +239,22 @@ const T &MyList_2<T>::operator[](const size_t index) const {
 
 template <typename T>
 typename MyList_2<T>::iterator MyList_2<T>::begin() noexcept {
-    return iterator(m_firstNode);
+    return iterator(m_firstNode, this);
 }
 
 template <typename T>
 typename MyList_2<T>::iterator MyList_2<T>::end() noexcept {
-    return iterator(nullptr);
+    return iterator(nullptr, this);
 }
 
 template <typename T>
 typename MyList_2<T>::const_iterator MyList_2<T>::begin() const noexcept {
-    return const_iterator(m_firstNode);
+    return const_iterator(m_firstNode, this);
 }
 
 template <typename T>
 typename MyList_2<T>::const_iterator MyList_2<T>::end() const noexcept {
-    return const_iterator(nullptr);
+    return const_iterator(nullptr, this);
 }
 
 template <typename T>
@@ -324,7 +324,7 @@ void MyList_2<T>::checkIndex(const size_t index, const char *function_name) cons
 // --- Реализация методов iterator ---
 
 template <typename T>
-MyList_2<T>::iterator::iterator(Node *node) : m_node(node) {}
+MyList_2<T>::iterator::iterator(Node *node, MyList_2 *list) : m_node(node), m_list(list) {}
 
 template <typename T>
 T &MyList_2<T>::iterator::operator*() const {
@@ -352,6 +352,24 @@ typename MyList_2<T>::iterator MyList_2<T>::iterator::operator++(int) {
 }
 
 template <typename T>
+typename MyList_2<T>::iterator &MyList_2<T>::iterator::operator--() {
+    if (m_node == nullptr) {
+        // Если итератор указывает на end(), переходим к последнему элементу списка
+        m_node = m_list->m_lastNode;
+    } else {
+        m_node = m_node->prev;
+    }
+    return *this;
+}
+
+template <typename T>
+typename MyList_2<T>::iterator MyList_2<T>::iterator::operator--(int) {
+    iterator temp = *this;
+    --(*this);
+    return temp;
+}
+
+template <typename T>
 bool MyList_2<T>::iterator::operator==(const iterator &other) const {
     return m_node == other.m_node;
 }
@@ -364,7 +382,8 @@ bool MyList_2<T>::iterator::operator!=(const iterator &other) const {
 // --- Реализация методов const_iterator ---
 
 template <typename T>
-MyList_2<T>::const_iterator::const_iterator(const Node *node) : m_node(node) {}
+MyList_2<T>::const_iterator::const_iterator(const Node *node, const MyList_2 *list)
+    : m_node(node), m_list(list) {}
 
 template <typename T>
 const T &MyList_2<T>::const_iterator::operator*() const {
@@ -388,6 +407,24 @@ template <typename T>
 typename MyList_2<T>::const_iterator MyList_2<T>::const_iterator::operator++(int) {
     const_iterator temp = *this;
     ++(*this);
+    return temp;
+}
+
+template <typename T>
+typename MyList_2<T>::const_iterator &MyList_2<T>::const_iterator::operator--() {
+    if (m_node == nullptr) {
+        // Если итератор указывает на end(), переходим к последнему элементу списка
+        m_node = m_list->m_lastNode;
+    } else {
+        m_node = m_node->prev;
+    }
+    return *this;
+}
+
+template <typename T>
+typename MyList_2<T>::const_iterator MyList_2<T>::const_iterator::operator--(int) {
+    const_iterator temp = *this;
+    --(*this);
     return temp;
 }
 
