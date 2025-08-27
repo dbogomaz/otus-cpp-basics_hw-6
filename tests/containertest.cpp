@@ -88,7 +88,6 @@ void containerTest() {
     
     // Дополнительные тесты
     std::cout << "Final size: " << container.size() << std::endl;
-    std::cout << "Final capacity: " << container.capacity() << std::endl;
     
     std::cout << "=== All tests passed! ===" << std::endl << std::endl;
 }
@@ -96,7 +95,7 @@ void containerTest() {
 }  // namespace tests
 
 int main() { 
-    // tests::containerTest<MyVector<int>>();
+    tests::containerTest<MyVector<int>>();
     tests::containerTest<MyList_1<int>>();
     return 0;
 }

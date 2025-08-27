@@ -14,7 +14,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_EXTENSIONS OFF
 )
 
-option(BUILD_TESTS "Whether to build tests or not" OFF)
+option(BUILD_TESTS "Whether to build tests or not" ON)
 if (BUILD_TESTS)
     set(TESTS_SOURCE
         tests/containertest.cpp
