@@ -24,9 +24,7 @@ public:
     void insert(const size_t index, const T &value); // добавление по индексу
     void erase(const size_t index); // удаление по индексу
     void clear(); // очистка списка
-    size_t capacity() const;
     size_t size() const; // текущий размер
-    void reserve(const size_t new_capacity);
     
     T &at(const size_t index);
     const T &at(size_t index) const;
@@ -43,17 +41,13 @@ public:
 
 
 private:
-    size_t m_capacity{1};                          // вместимость
     size_t m_size{0};                              // текущий размер
-    static constexpr float CAPACITY_FACTOR{1.5f};  // коэффициент выделения памяти
-    T *m_data{nullptr};
     Node *m_firstNode{nullptr};  // указатель на первый элемент
     Node *m_lastNode{nullptr};   // указатель на последний элемент
 
     void copyFrom(const MyList_1 &other); // копирование из другого списка
     void moveFrom(MyList_1 &&other) noexcept; // перемещение из другого списка
     void checkIndex(const size_t index, const char *function_name) const; // проверка индекса
-    void growCapacity();
 };
 
 template <typename T>

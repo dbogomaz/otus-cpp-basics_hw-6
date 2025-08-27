@@ -185,20 +185,8 @@ void MyList_1<T>::clear() {
 // --- Методы информации о списке ---
 
 template <typename T>
-size_t MyList_1<T>::capacity() const {
-    return m_capacity;
-}
-
-template <typename T>
 size_t MyList_1<T>::size() const {
     return m_size;
-}
-
-template <typename T>
-void MyList_1<T>::reserve(const size_t new_capacity) {
-    if (new_capacity > m_capacity) {
-        m_capacity = new_capacity;
-    }
 }
 
 // --- Методы доступа к элементам ---
@@ -312,15 +300,6 @@ void MyList_1<T>::checkIndex(const size_t index, const char *function_name) cons
             << " out of range (size: " << m_size << ")";
         throw std::out_of_range(oss.str());
     }
-}
-
-template <typename T>
-void MyList_1<T>::growCapacity() {
-    size_t new_capacity = static_cast<size_t>(m_capacity * CAPACITY_FACTOR);
-    if (new_capacity <= m_capacity) {
-        new_capacity = m_capacity + 1;
-    }
-    reserve(new_capacity);
 }
 
 // --- Реализация методов iterator ---
