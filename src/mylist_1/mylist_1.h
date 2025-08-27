@@ -20,7 +20,7 @@ public:
     bool operator!=(const MyList_1 &other) const; // оператора сравнения
     ~MyList_1(); // деструктор
 
-    void push_back(const T &value);
+    void push_back(const T &value); // добавление элемента в конец списка
     void insert(const size_t index, const T &value);
     void erase(const size_t index);
     void clear(); // очистка списка
