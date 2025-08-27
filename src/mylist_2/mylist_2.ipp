@@ -114,6 +114,7 @@ void MyList_2<T>::push_back(const T &value) {
         m_lastNode = newNode;
     } else {
         m_lastNode->next = newNode;
+        newNode->prev = m_lastNode;
         m_lastNode = newNode;
     }
     ++m_size;
@@ -131,14 +132,16 @@ void MyList_2<T>::insert(const size_t index, const T &value) {
     // вставка в начало
     if (index == 0) {
         newNode->next = m_firstNode;
+        m_firstNode->prev = newNode;
         m_firstNode = newNode;
     } else {
-        Node *prev = m_firstNode;
+        Node *prevNode = m_firstNode;
         for (size_t i = 0; i < index - 1; ++i) {
-            prev = prev->next;
+            prevNode = prevNode->next;
         }
-        newNode->next = prev->next;
-        prev->next = newNode;
+        newNode->next = prevNode->next;
+        newNode->prev = prevNode;
+        prevNode->next = newNode;
     }
     ++m_size;
 }
