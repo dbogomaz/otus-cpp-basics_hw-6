@@ -84,7 +84,7 @@ public:
     bool operator!=(const const_iterator &other) const;
 
 private:
-    Node* m_node;
+   const Node* m_node;
 };
 
 template <typename T>
